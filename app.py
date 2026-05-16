@@ -117,7 +117,7 @@ def _get_sheet():
       GOOGLE_SHEET_NAME            — exact name of your Google Sheet
                                      (default: "Portfolio Messages")
     """
-    creds_env = os.environ.get("GOOGLE_SERVICE_ACCOUNT_JSON", "")
+    creds_env = os.environ.get("GOOGLE_CREDENTIALS", "")
     sheet_name = os.environ.get("GOOGLE_SHEET_NAME", "Portfolio Messages")
     scopes = [
         "https://www.googleapis.com/auth/spreadsheets",
