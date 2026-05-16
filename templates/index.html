@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{# ── Hero ─────────────────────────────────────────────────────────────────── #}
+<section class="container mx-auto px-6 pt-12 pb-24">
+	<div class="grid md:grid-cols-2 gap-10 items-center">
+		<div>
+			<p class="text-sm font-semibold uppercase tracking-widest text-primary mb-3">Full‑Stack Developer</p>
+			<h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
+				Hi, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-fuchsia-500">{{ site.brand }}</span>
+			</h1>
+			<p class="mt-4 text-gray-600 dark:text-gray-300 max-w-xl text-lg leading-relaxed">
+				{{ site.tagline }}
+			</p>
+			<div class="mt-8 flex flex-col sm:flex-row gap-4">
+				<a href="#projects" class="px-6 py-3 rounded-full bg-primary text-white shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:-translate-y-0.5 transition-all text-center font-medium">
+					View Projects
+				</a>
+				<a href="#contact" class="px-6 py-3 rounded-full bg-gray-900 text-white dark:bg-white dark:text-gray-900 hover:ring-2 ring-primary hover:-translate-y-0.5 transition-all text-center font-medium">
+					Contact Me
+				</a>
+			</div>
+			<!-- quick badges -->
+			<div class="mt-8 flex flex-wrap gap-2">
+				{% for skill in site.skills %}
+				<span class="px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-soft">
+					{{ skill.title }}
+				</span>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="relative flex items-center justify-center h-64 sm:h-72 md:h-96">
+			<div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/20 to-fuchsia-500/20 blur-2xl"></div>
+			<img src="{{ url_for('static', filename='images/profile.jpg') }}"
+				 alt="{{ site.brand }}"
+				 class="relative w-48 h-78 sm:w-56 sm:h-76 md:w-72 md:h-82 rounded-3xl object-cover ring-4 ring-primary/30 shadow-2xl hover:scale-105 transition-transform duration-500"/>
+		</div>
+	</div>
+</section>
+
+{# ── About ────────────────────────────────────────────────────────────────── #}
+<section id="about" class="container mx-auto px-6 py-16">
+	<h2 class="text-3xl font-bold mb-6">About</h2>
+	<div class="max-w-3xl p-8 rounded-2xl bg-white/60 dark:bg-white/5 backdrop-blur border border-gray-200 dark:border-gray-800 shadow-sm">
+		<p id="about-preview" class="text-gray-600 dark:text-gray-300 leading-relaxed">
+			{{ site.about_short }}
+		</p>
+		<div id="about-full" class="hidden mt-4">
+			{% for para in site.about_full.split('\n\n') %}
+			<p class="text-gray-600 dark:text-gray-300 leading-relaxed {% if not loop.first %}mt-4{% endif %}">{{ para }}</p>
+			{% endfor %}
+		</div>
+		<button id="about-toggle"
+			class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline focus:outline-none group">
+			<span id="about-btn-text">Read More</span>
+			<svg id="about-chevron" class="w-4 h-4 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+			</svg>
+		</button>
+	</div>
+</section>
+
+{# ── Skills ───────────────────────────────────────────────────────────────── #}
+<section id="skills" class="container mx-auto px-6 py-16">
+	<h2 class="text-3xl font-bold mb-6">Skills</h2>
+	<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+		{% for skill in site.skills %}
+		<div class="group p-5 rounded-2xl bg-gray-100 dark:bg-gray-800 hover:bg-primary/10 dark:hover:bg-primary/20 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-default">
+			<h3 class="font-semibold group-hover:text-primary transition-colors">{{ skill.title }}</h3>
+			<p class="mt-2 text-sm text-gray-600 dark:text-gray-300">{{ skill.items }}</p>
+		</div>
+		{% endfor %}
+	</div>
+</section>
+
+{# ── Experience ───────────────────────────────────────────────────────────── #}
+<section id="experience" class="container mx-auto px-6 py-16">
+	<h2 class="text-3xl font-bold mb-6">Experience</h2>
+	<div class="space-y-4">
+		{% for exp in site.experience %}
+		<div class="p-6 rounded-2xl bg-white/60 dark:bg-white/5 backdrop-blur border border-gray-200 dark:border-gray-800 hover:border-primary/40 hover:shadow-lg transition-all duration-300">
+			<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
+				<h3 class="font-semibold text-lg">{{ exp.role }} <span class="text-primary">@ {{ exp.company }}</span></h3>
+				<span class="text-sm text-gray-500 bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full flex-shrink-0">{{ exp.period }}</span>
+			</div>
+			<p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{{ exp.description }}</p>
+		</div>
+		{% endfor %}
+	</div>
+</section>
+
+{# ── Projects ─────────────────────────────────────────────────────────────── #}
+<section id="projects" class="container mx-auto px-6 py-16">
+	<h2 class="text-3xl font-bold mb-8">Projects</h2>
+	<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+		{% for p in projects %}
+		{% set link = (p.github_url if p.github_url and p.github_url != '#' else (p.project_url if p.project_url and p.project_url != '#' else '#')) %}
+		<a href="{{ link }}" target="_blank" rel="noreferrer"
+		   class="group rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-white/60 dark:bg-white/5 backdrop-blur hover:shadow-2xl hover:-translate-y-2 hover:border-primary/40 transition-all duration-500 block">
+
+			<div class="aspect-[16/10] bg-gray-100 dark:bg-gray-900 overflow-hidden relative">
+				{% set is_external = p.image_url and (p.image_url.startswith('http://') or p.image_url.startswith('https://')) %}
+				<img src="{{ p.image_url if is_external else url_for('static', filename=p.image_url or 'images/profile.jpg') }}"
+					 alt="{{ p.title }}"
+					 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"/>
+				<!-- overlay on hover -->
+				<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+					<span class="text-white text-sm font-medium">View on GitHub →</span>
+				</div>
+			</div>
+
+			<div class="p-5">
+				<h3 class="text-lg font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors duration-200">
+					{{ p.title }}
+				</h3>
+				<p class="mt-1 text-gray-600 dark:text-gray-300 text-sm line-clamp-2">
+					{{ p.description or 'No description available.' }}
+				</p>
+				{% if p.tech_stack %}
+				<div class="mt-3 flex flex-wrap gap-1">
+					{% for tech in p.tech_stack.split(',') %}
+					<span class="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-medium">{{ tech.strip() }}</span>
+					{% endfor %}
+				</div>
+				{% endif %}
+			</div>
+		</a>
+		{% endfor %}
+	</div>
+</section>
+
+{# ── Services ─────────────────────────────────────────────────────────────── #}
+<section id="services" class="container mx-auto px-6 py-16">
+	<h2 class="text-3xl font-bold mb-6">Services</h2>
+	<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+		{% for svc in site.services %}
+		<div class="group p-6 rounded-2xl bg-gray-100 dark:bg-gray-800 hover:bg-gradient-to-br hover:from-primary/10 hover:to-fuchsia-500/10 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-default">
+			<h3 class="font-semibold group-hover:text-primary transition-colors">{{ svc.title }}</h3>
+			<p class="mt-2 text-sm text-gray-600 dark:text-gray-300">{{ svc.desc }}</p>
+		</div>
+		{% endfor %}
+	</div>
+</section>
+
+{# ── CTA ──────────────────────────────────────────────────────────────────── #}
+<section class="container mx-auto px-6 py-16">
+	<div class="p-10 rounded-3xl bg-gradient-to-r from-primary to-fuchsia-500 text-white text-center shadow-xl shadow-primary/30">
+		<h2 class="text-2xl md:text-3xl font-bold">Have a project in mind?</h2>
+		<p class="mt-2 opacity-90">Let's build something great together.</p>
+		<a href="#contact" class="inline-block mt-6 px-8 py-3 rounded-full bg-white text-gray-900 font-semibold hover:opacity-90 hover:-translate-y-0.5 transition-all shadow-lg">
+			Get in touch
+		</a>
+	</div>
+</section>
+
+{# ── FAQ ──────────────────────────────────────────────────────────────────── #}
+<section id="faq" class="container mx-auto px-6 py-16">
+	<h2 class="text-3xl font-bold mb-6">FAQ</h2>
+	<div class="grid md:grid-cols-2 gap-6 max-w-4xl">
+		{% for item in site.faq %}
+		<div class="p-6 rounded-2xl bg-gray-100 dark:bg-gray-800 hover:bg-primary/10 dark:hover:bg-primary/20 transition-all duration-200 hover:shadow-md cursor-default">
+			<h3 class="font-semibold text-gray-900 dark:text-white">{{ item.q }}</h3>
+			<p class="mt-2 text-sm text-gray-600 dark:text-gray-300">{{ item.a }}</p>
+		</div>
+		{% endfor %}
+	</div>
+</section>
+
+{# ── Contact ──────────────────────────────────────────────────────────────── #}
+<section id="contact" class="container mx-auto px-6 py-16">
+	<h2 class="text-3xl font-bold mb-2">Contact</h2>
+	<p class="text-gray-500 dark:text-gray-400 mb-8">Your message is saved to the database and sent to Google Sheets automatically.</p>
+
+	{% with messages = get_flashed_messages(with_categories=true) %}
+		{% if messages %}
+			{% for category, message in messages %}
+			<div class="mb-6 px-4 py-3 rounded-xl {{ 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200' if category == 'success' else 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-200' }}">
+				{{ message }}
+			</div>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+
+	<form action="/contact" method="POST" class="grid md:grid-cols-2 gap-5 max-w-3xl">
+		<input  class="px-4 py-3 rounded-xl bg-gray-100 dark:bg-gray-800 outline-none focus:ring-2 ring-primary transition placeholder-gray-400"
+				name="name" placeholder="Your Name" required>
+		<input  class="px-4 py-3 rounded-xl bg-gray-100 dark:bg-gray-800 outline-none focus:ring-2 ring-primary transition placeholder-gray-400"
+				name="phone" placeholder="Phone Number" required>
+		<select class="px-4 py-3 rounded-xl bg-gray-100 dark:bg-gray-800 outline-none focus:ring-2 ring-primary transition" name="service" required>
+			<option value="">What are you looking for?</option>
+			<option value="Web Application">Web Application</option>
+			<option value="Mobile Application">Mobile Application</option>
+			<option value="Digital Marketing">Digital Marketing</option>
+		</select>
+		<input  class="px-4 py-3 rounded-xl bg-gray-100 dark:bg-gray-800 outline-none focus:ring-2 ring-primary transition placeholder-gray-400"
+				type="email" name="email" placeholder="Email" required>
+		<textarea class="md:col-span-2 px-4 py-3 rounded-xl bg-gray-100 dark:bg-gray-800 outline-none focus:ring-2 ring-primary transition placeholder-gray-400 resize-none"
+				  name="message" placeholder="Tell me about your project…" rows="5" required></textarea>
+		<button class="md:col-span-2 px-6 py-3 rounded-xl bg-primary text-white font-semibold hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 transition-all"
+				type="submit">
+			Send Message →
+		</button>
+	</form>
+</section>
+
+<script>
+	// ── About Read More ────────────────────────────────────────────────────
+	const toggleBtn   = document.getElementById('about-toggle');
+	const fullText    = document.getElementById('about-full');
+	const btnText     = document.getElementById('about-btn-text');
+	const chevron     = document.getElementById('about-chevron');
+	let expanded = false;
+
+	toggleBtn.addEventListener('click', () => {
+		expanded = !expanded;
+		fullText.classList.toggle('hidden', !expanded);
+		btnText.textContent  = expanded ? 'Read Less' : 'Read More';
+		chevron.style.transform = expanded ? 'rotate(180deg)' : 'rotate(0deg)';
+	});
+</script>
+{% endblock %}
