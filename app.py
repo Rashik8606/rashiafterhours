@@ -43,17 +43,27 @@ SITE_CONTENT = {
     # Experience
     "experience": [
         {
+            "role": "IT Assistant  ",
+            "company": "Thiru Kochi Fincap Limeted Kochi",
+            "period": "Present - 2026",
+            "description": (
+                "Provided IT support and technical assistance for daily business operations, including system maintenance, troubleshooting hardware and software issues, managing user accounts, and ensuring smooth network functionality. Assisted staff with technical problems, maintained system performance, and supported overall IT infrastructure to improve operational efficiency and reliability."
+
+            ),
+        },
+        {
             "role": "Python Full Stack Developer",
             "company": "One Team Solutions, Kochi",
-            "period": "2025 — Present",
+            "period": "2024 - 2025",
             "description": (
                 "Completed an internship as a Python Full Stack Developer Intern at OneTeam Solutions, "
                 "gaining hands-on experience in Django, React, and REST API integration. "
                 "Worked on real-world projects including web applications, authentication systems, "
                 "and UI/UX improvements."
             ),
-        }
+        },
     ],
+    
 
     # Services
     "services": [
