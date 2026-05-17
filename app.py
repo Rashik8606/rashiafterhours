@@ -34,10 +34,10 @@ SITE_CONTENT = {
 
     # Skills
     "skills": [
-        {"title": "Frontend",   "items": "HTML, CSS, Tailwind, JavaScript, React, Bootstrap, Canvas"},
-        {"title": "Backend",    "items": "Python, Flask, Django, REST APIs"},
-        {"title": "Databases",  "items": "MySQL, SQLite, MongoDB"},
-        {"title": "Tools",      "items": "Git, Docker basics, CI/CD"},
+        {"title": "Frontend",   "tech": "HTML, CSS, Tailwind, JavaScript, React, Bootstrap, Canvas"},
+        {"title": "Backend",    "tech": "Python, Flask, Django, REST APIs"},
+        {"title": "Databases",  "tech": "MySQL, SQLite, MongoDB"},
+        {"title": "Tools",      "tech": "Git, Docker basics, CI/CD"},
     ],
 
     # Experience
