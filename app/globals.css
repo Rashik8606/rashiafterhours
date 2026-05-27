@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ring: #7c3aed;
+}
+
+html {
+  color-scheme: dark;
+}
+
+html:not(.dark) {
+  color-scheme: light;
+}
+
+.card-glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 1rem;
+}
+
+.dark .card-glass {
+  background: rgba(0, 0, 0, 0.25);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.focus-ring:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ring);
+}
+
+.nav-link {
+  position: relative;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s, background 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+
+.nav-link:hover {
+  background: rgba(124, 58, 237, 0.12);
+  color: #7c3aed;
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.18);
+  transform: translateY(-1px);
+}
+
+.dark .nav-link:hover {
+  background: rgba(167, 139, 250, 0.15);
+  color: #a78bfa;
+  box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.22);
+}
+
+.nav-link.active {
+  background: rgba(124, 58, 237, 0.15);
+  color: #7c3aed;
+  font-weight: 600;
+}
+
+.dark .nav-link.active {
+  background: rgba(167, 139, 250, 0.2);
+  color: #a78bfa;
+}
+
+.mob-link {
+  display: block;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s, padding-left 0.2s;
+}
+
+.mob-link:hover {
+  background: rgba(124, 58, 237, 0.1);
+  color: #7c3aed;
+  padding-left: 22px;
+}
+
+.dark .mob-link:hover {
+  background: rgba(167, 139, 250, 0.12);
+  color: #a78bfa;
+}
+
+#cursor-glow {
+  width: 28px;
+  height: 28px;
+  background: radial-gradient(
+    circle,
+    rgba(124, 58, 237, 0.55) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  position: fixed;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.15s, height 0.15s, opacity 0.2s;
+  mix-blend-mode: screen;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.6s ease-out forwards;
+}
