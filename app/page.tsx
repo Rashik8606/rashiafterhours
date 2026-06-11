@@ -1,5 +1,6 @@
 import PortfolioLayout from "@/components/PortfolioLayout";
 import AboutSection from "@/components/AboutSection";
+import CurrentProjectSection from "@/components/CurrentProjectSection";
 import ContactForm from "@/components/ContactForm";
 import { siteContent } from "@/lib/site-content";
 import { projects, projectLink } from "@/lib/projects";
@@ -60,6 +61,8 @@ export default function HomePage() {
       </section>
 
       <AboutSection />
+
+      <CurrentProjectSection />
 
       <section id="skills" className="container mx-auto px-6 py-16">
         <h2 className="text-3xl font-bold mb-6">Skills</h2>

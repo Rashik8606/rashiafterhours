@@ -6,6 +6,7 @@ import { siteContent } from "@/lib/site-content";
 
 const NAV = [
   { href: "#about", label: "About" },
+  { href: "#working-on", label: "Working On" },
   { href: "#skills", label: "Skills" },
   { href: "#experience", label: "Experience" },
   { href: "#projects", label: "Projects" },
